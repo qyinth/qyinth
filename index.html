@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QYINTH | Digital Branding Studio</title>
+  <meta name="description" content="QYINTH helps brands grow with AI-assisted website development, copywriting, and digital marketing." />
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(255,255,255,.06);
+      --panel-2: rgba(255,255,255,.08);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --line: rgba(255,255,255,.12);
+      --accent: #5eead4;
+      --accent-2: #38bdf8;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.16), transparent 30%),
+        radial-gradient(circle at right top, rgba(34,211,238,.12), transparent 32%),
+        radial-gradient(circle at bottom center, rgba(94,234,212,.12), transparent 30%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7,17,31,.82);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .logo {
+      width: 46px; height: 46px; border-radius: 18px;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, rgba(94,234,212,.2), rgba(56,189,248,.15));
+      border: 1px solid rgba(94,234,212,.22);
+      box-shadow: var(--shadow);
+      font-weight: 800; letter-spacing: .08em;
+      color: #8be7dc;
+    }
+    .brand h1 { margin: 0; font-size: 14px; letter-spacing: .34em; }
+    .brand p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: white; }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: white;
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: .2s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-weight: 600;
+    }
+    .btn:hover { transform: translateY(-1px); background: var(--panel-2); }
+    .btn.accent {
+      background: linear-gradient(135deg, var(--accent), #d1fae5);
+      color: #05201c; border-color: transparent;
+    }
+    .btn.accent:hover { filter: brightness(1.02); }
+
+    .hero { padding: 80px 0 34px; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 34px; align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(94,234,212,.2);
+      background: rgba(94,234,212,.08);
+      color: #bffcf1;
+      padding: 10px 14px; border-radius: 999px; font-size: 14px;
+      margin-bottom: 18px;
+    }
+    h2 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.02; letter-spacing: -.04em; margin: 0;
+      max-width: 10ch;
+    }
+    .lead { color: var(--muted); font-size: 18px; line-height: 1.8; max-width: 60ch; margin: 22px 0 0; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .hero-card { padding: 28px; }
+    .hero-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .tag {
+      padding: 8px 12px; border-radius: 999px; font-size: 12px;
+      background: rgba(94,234,212,.1); color: #bffcf1; border: 1px solid rgba(94,234,212,.18);
+    }
+    .checklist { display: grid; gap: 12px; margin-top: 24px; }
+    .item {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px 15px; border-radius: 18px; background: rgba(0,0,0,.16); border: 1px solid rgba(255,255,255,.08);
+      color: #e2e8f0; line-height: 1.6;
+    }
+    .dot { color: var(--accent); font-weight: 900; margin-top: 1px; }
+    .contact-box {
+      margin-top: 22px; padding: 18px; border-radius: 22px;
+      background: rgba(6,16,29,.9); border: 1px solid rgba(255,255,255,.08);
+      display: grid; gap: 12px;
+    }
+    .small { color: var(--muted); font-size: 14px; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 26px; }
+    .stat { padding: 18px; }
+    .stat b { display: block; font-size: 30px; color: var(--accent); }
+    .stat span { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    section { padding: 42px 0; }
+    .section-title { margin-bottom: 18px; }
+    .section-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.06); border: 1px solid var(--line);
+      color: #dbeafe; font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    }
+    .section-title h3 { font-size: clamp(30px, 4vw, 48px); margin: 14px 0 8px; }
+    .section-title p { color: var(--muted); line-height: 1.8; max-width: 820px; }
+
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card { padding: 22px; }
+    .card h4 { margin: 14px 0 8px; font-size: 20px; }
+    .card p { color: var(--muted); line-height: 1.8; margin: 0; }
+    .icon {
+      width: 48px; height: 48px; border-radius: 18px;
+      background: linear-gradient(135deg, rgba(56,189,248,.12), rgba(94,234,212,.12));
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .benefits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .benefit { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 18px; background: rgba(0,0,0,.16); border: 1px solid rgba(255,255,255,.08); }
+
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step-num { color: var(--accent); font-size: 13px; letter-spacing: .3em; }
+    .step-text { font-size: 18px; line-height: 1.8; margin-top: 14px; }
+
+    .cta {
+      background: linear-gradient(90deg, rgba(94,234,212,.16), rgba(56,189,248,.12));
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 28px;
+      border-radius: 28px;
+      display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center;
+    }
+    .footer { padding: 30px 0 42px; color: var(--muted); border-top: 1px solid var(--line); margin-top: 18px; }
+    .wa-float {
+      position: fixed; right: 18px; bottom: 18px; z-index: 60;
+      width: 58px; height: 58px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #22c55e; color: white; box-shadow: 0 14px 34px rgba(34,197,94,.35);
+    }
+    .mobile-toggle { display: none; }
+    .mobile-menu { display: none; padding: 0 0 16px; }
+    .lang-note { color: var(--muted); font-size: 13px; margin-top: 14px; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .grid-4, .grid-2, .steps, .cta, .stats { grid-template-columns: 1fr; }
+      h2 { max-width: none; }
+      .nav-links { display: none; }
+      .mobile-toggle { display: inline-flex; }
+      .mobile-menu.show { display: grid; gap: 12px; padding-bottom: 18px; }
+      .benefits { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a href="#home" class="brand" aria-label="QYINTH Home">
+          <div class="logo">Q</div>
+          <div>
+            <h1>QYINTH</h1>
+            <p>Digital Branding Studio</p>
+          </div>
+        </a>
+
+        <nav class="nav-links">
+          <a href="#services" data-en="Services" data-id="Layanan">Services</a>
+          <a href="#about" data-en="About" data-id="Tentang">About</a>
+          <a href="#process" data-en="Process" data-id="Proses">Process</a>
+          <a href="#contact" data-en="Contact" data-id="Kontak">Contact</a>
+          <button class="btn" id="langBtn" type="button">ID</button>
+        </nav>
+
+        <button class="btn mobile-toggle" id="menuBtn" type="button">Menu</button>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#services" data-en="Services" data-id="Layanan">Services</a>
+        <a href="#about" data-en="About" data-id="Tentang">About</a>
+        <a href="#process" data-en="Process" data-id="Proses">Process</a>
+        <a href="#contact" data-en="Contact" data-id="Kontak">Contact</a>
+        <button class="btn" id="langBtnMobile" type="button">ID</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow" id="eyebrow">AI-assisted digital growth for modern brands</div>
+          <h2 id="heroTitle">Build a stronger digital presence with QYINTH.</h2>
+          <p class="lead" id="heroSub">
+            We help brands turn ideas into high-converting websites, persuasive copy, and marketing systems that look premium and work strategically.
+          </p>
+          <div class="cta-row">
+            <a class="btn accent" id="waTop" href="https://wa.me/628139179048?text=Hello%20QYINTH%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noreferrer">Start on WhatsApp</a>
+            <a class="btn" href="#services" id="seeServices">See Services</a>
+          </div>
+          <div class="stats">
+            <div class="panel stat"><b>01</b><span id="s1">Clear brand positioning</span></div>
+            <div class="panel stat"><b>02</b><span id="s2">Conversion-focused web design</span></div>
+            <div class="panel stat"><b>03</b><span id="s3">AI-assisted content workflow</span></div>
+          </div>
+          <div class="lang-note">Manual language switch is available using the button above.</div>
+        </div>
+
+        <div class="panel hero-card">
+          <div class="hero-card-top">
+            <div>
+              <div style="color:#94a3b8; font-size:12px; letter-spacing:.3em; text-transform:uppercase;">QYINTH</div>
+              <h3 style="margin:8px 0 0; font-size:26px;">Digital Presence Kit</h3>
+            </div>
+            <div class="tag">AI-Assisted</div>
+          </div>
+
+          <div class="checklist">
+            <div class="item"><span class="dot">•</span><span id="c1">Strategy-first website structure</span></div>
+            <div class="item"><span class="dot">•</span><span id="c2">Clean copy that drives action</span></div>
+            <div class="item"><span class="dot">•</span><span id="c3">Mobile-friendly and conversion-ready</span></div>
+            <div class="item"><span class="dot">•</span><span id="c4">Manual EN / ID language switch</span></div>
+          </div>
+
+          <div class="contact-box">
+            <div class="small" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+              <span>WhatsApp</span>
+              <span>+62 813 9179 048</span>
+            </div>
+            <a class="btn" style="width:100%; background:white; color:#08111d; border:none;" id="waCard" href="https://wa.me/628139179048?text=Hello%20QYINTH%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noreferrer">Contact via WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-title">
+        <div class="section-kicker" id="servicesKicker">What QYINTH Can Help You With</div>
+        <h3 id="servicesTitle">What QYINTH Can Help You With</h3>
+        <p id="servicesDesc">Focused services designed to help your business look credible and convert better.</p>
+      </div>
+      <div class="grid-4">
+        <div class="panel card"><div class="icon"></div><h4 id="sv1t">Website Development</h4><p id="sv1d">Landing pages and business websites designed for clarity, speed, and trust.</p></div>
+        <div class="panel card"><div class="icon"></div><h4 id="sv2t">Copywriting</h4><p id="sv2d">Words that explain your value clearly and guide visitors toward action.</p></div>
+        <div class="panel card"><div class="icon"></div><h4 id="sv3t">Digital Marketing Strategy</h4><p id="sv3d">Simple, practical direction for building awareness and generating leads.</p></div>
+        <div class="panel card"><div class="icon"></div><h4 id="sv4t">Brand Messaging</h4><p id="sv4d">A consistent voice that makes your business feel more premium and memorable.</p></div>
+      </div>
+    </section>
+
+    <section id="about" class="grid-2">
+      <div>
+        <div class="section-title">
+          <div class="section-kicker" id="aboutKicker">Built for founders who want to grow smarter</div>
+          <h3 id="aboutTitle">Built for founders who want to grow smarter</h3>
+          <p id="aboutDesc">QYINTH is a digital brand focused on helping businesses present themselves professionally online. Our approach combines strategy, design, writing, and AI-assisted efficiency to create work that is polished and purposeful.</p>
+        </div>
+      </div>
+      <div class="panel card">
+        <div class="benefits">
+          <div class="benefit"><div class="dot">•</div><div id="b1">Professional online presence</div></div>
+          <div class="benefit"><div class="dot">•</div><div id="b2">Clear messaging that sells</div></div>
+          <div class="benefit"><div class="dot">•</div><div id="b3">Modern visual direction</div></div>
+          <div class="benefit"><div class="dot">•</div><div id="b4">AI-assisted speed with human judgment</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="section-title">
+        <div class="section-kicker" id="processKicker">Simple Process</div>
+        <h3 id="processTitle">Simple Process</h3>
+        <p id="processDesc">A simple workflow that keeps projects clear, fast, and organized.</p>
+      </div>
+      <div class="steps">
+        <div class="panel card"><div class="step-num">01</div><div class="step-text" id="p1">Discover your goals and target audience</div></div>
+        <div class="panel card"><div class="step-num">02</div><div class="step-text" id="p2">Shape the structure, message, and style</div></div>
+        <div class="panel card"><div class="step-num">03</div><div class="step-text" id="p3">Build, refine, and launch with confidence</div></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="cta panel">
+        <div>
+          <h3 id="ctaTitle" style="font-size: clamp(28px, 4vw, 44px); margin: 0;">Ready to build your website?</h3>
+          <p id="ctaDesc" style="margin: 14px 0 0; color: var(--muted); line-height: 1.8; max-width: 760px;">Send a message on WhatsApp and let’s turn your idea into a clean, persuasive digital presence.</p>
+        </div>
+        <a class="btn accent" id="waBottom" href="https://wa.me/628139179048?text=Hello%20QYINTH%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noreferrer">Contact via WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <a class="wa-float" href="https://wa.me/628139179048?text=Hello%20QYINTH%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noreferrer" aria-label="WhatsApp contact">✆</a>
+
+  <footer class="footer">
+    <div class="wrap" id="footerText">QYINTH — digital solutions with strategy, design, and AI-assisted execution.</div>
+  </footer>
+
+  <script>
+    const state = { lang: 'en' };
+    const texts = {
+      en: {
+        langBtn: 'ID',
+        eyebrow: 'AI-assisted digital growth for modern brands',
+        heroTitle: 'Build a stronger digital presence with QYINTH.',
+        heroSub: 'We help brands turn ideas into high-converting websites, persuasive copy, and marketing systems that look premium and work strategically.',
+        seeServices: 'See Services',
+        s1: 'Clear brand positioning',
+        s2: 'Conversion-focused web design',
+        s3: 'AI-assisted content workflow',
+        c1: 'Strategy-first website structure',
+        c2: 'Clean copy that drives action',
+        c3: 'Mobile-friendly and conversion-ready',
+        c4: 'Manual EN / ID language switch',
+        servicesKicker: 'What QYINTH Can Help You With',
+        servicesTitle: 'What QYINTH Can Help You With',
+        servicesDesc: 'Focused services designed to help your business look credible and convert better.',
+        sv1t: 'Website Development',
+        sv1d: 'Landing pages and business websites designed for clarity, speed, and trust.',
+        sv2t: 'Copywriting',
+        sv2d: 'Words that explain your value clearly and guide visitors toward action.',
+        sv3t: 'Digital Marketing Strategy',
+        sv3d: 'Simple, practical direction for building awareness and generating leads.',
+        sv4t: 'Brand Messaging',
+        sv4d: 'A consistent voice that makes your business feel more premium and memorable.',
+        aboutKicker: 'Built for founders who want to grow smarter',
+        aboutTitle: 'Built for founders who want to grow smarter',
+        aboutDesc: 'QYINTH is a digital brand focused on helping businesses present themselves professionally online. Our approach combines strategy, design, writing, and AI-assisted efficiency to create work that is polished and purposeful.',
+        b1: 'Professional online presence',
+        b2: 'Clear messaging that sells',
+        b3: 'Modern visual direction',
+        b4: 'AI-assisted speed with human judgment',
+        processKicker: 'Simple Process',
+        processTitle: 'Simple Process',
+        processDesc: 'A simple workflow that keeps projects clear, fast, and organized.',
+        p1: 'Discover your goals and target audience',
+        p2: 'Shape the structure, message, and style',
+        p3: 'Build, refine, and launch with confidence',
+        ctaTitle: 'Ready to build your website?',
+        ctaDesc: 'Send a message on WhatsApp and let’s turn your idea into a clean, persuasive digital presence.',
+        footerText: 'QYINTH — digital solutions with strategy, design, and AI-assisted execution.',
+        waTop: 'Start on WhatsApp',
+        waCard: 'Contact via WhatsApp',
+        waBottom: 'Contact via WhatsApp'
+      },
+      id: {
+        langBtn: 'EN',
+        eyebrow: 'Pertumbuhan digital berbasis AI untuk brand modern',
+        heroTitle: 'Bangun kehadiran digital yang lebih kuat bersama QYINTH.',
+        heroSub: 'Kami membantu brand mengubah ide menjadi website yang meyakinkan, copywriting yang persuasif, dan sistem marketing yang terlihat premium sekaligus strategis.',
+        seeServices: 'Lihat Layanan',
+        s1: 'Posisi brand yang jelas',
+        s2: 'Website fokus konversi',
+        s3: 'Workflow konten berbasis AI',
+        c1: 'Struktur website berbasis strategi',
+        c2: 'Copy yang rapi dan menggerakkan aksi',
+        c3: 'Mobile-friendly dan siap konversi',
+        c4: 'Manual ganti bahasa EN / ID',
+        servicesKicker: 'Apa yang Bisa Dibantu QYINTH',
+        servicesTitle: 'Apa yang Bisa Dibantu QYINTH',
+        servicesDesc: 'Layanan yang dirancang agar bisnis Anda terlihat kredibel dan lebih mudah menghasilkan konversi.',
+        sv1t: 'Pembuatan Website',
+        sv1d: 'Landing page dan website bisnis yang dirancang untuk jelas, cepat, dan terpercaya.',
+        sv2t: 'Copywriting',
+        sv2d: 'Kalimat yang menjelaskan nilai bisnis Anda secara tepat dan mengarahkan orang untuk bertindak.',
+        sv3t: 'Strategi Digital Marketing',
+        sv3d: 'Arah yang praktis untuk membangun awareness dan menghasilkan leads.',
+        sv4t: 'Brand Messaging',
+        sv4d: 'Suara brand yang konsisten agar bisnis terasa lebih premium dan mudah diingat.',
+        aboutKicker: 'Dibuat untuk founder yang ingin tumbuh lebih cerdas',
+        aboutTitle: 'Dibuat untuk founder yang ingin tumbuh lebih cerdas',
+        aboutDesc: 'QYINTH adalah brand digital yang berfokus membantu bisnis tampil profesional secara online. Pendekatan kami menggabungkan strategi, desain, penulisan, dan efisiensi berbasis AI untuk menghasilkan karya yang rapi dan tepat sasaran.',
+        b1: 'Kehadiran online yang profesional',
+        b2: 'Pesan yang jelas dan menjual',
+        b3: 'Arah visual yang modern',
+        b4: 'Kecepatan AI dengan pertimbangan manusia',
+        processKicker: 'Proses Sederhana',
+        processTitle: 'Proses Sederhana',
+        processDesc: 'Alur kerja sederhana agar project tetap jelas, cepat, dan terstruktur.',
+        p1: 'Pahami tujuan dan audiens Anda',
+        p2: 'Susun struktur, pesan, dan gaya visual',
+        p3: 'Bangun, rapikan, lalu luncurkan dengan percaya diri',
+        ctaTitle: 'Siap membangun website Anda?',
+        ctaDesc: 'Kirim pesan via WhatsApp dan mari ubah ide Anda menjadi kehadiran digital yang bersih dan persuasif.',
+        footerText: 'QYINTH — solusi digital dengan strategi, desain, dan eksekusi berbasis AI.',
+        waTop: 'Chat via WhatsApp',
+        waCard: 'Kontak via WhatsApp',
+        waBottom: 'Kontak via WhatsApp'
+      }
+    };
+
+    function setLang(lang) {
+      state.lang = lang;
+      document.documentElement.lang = lang;
+      const t = texts[lang];
+      document.getElementById('langBtn').textContent = t.langBtn;
+      document.getElementById('langBtnMobile').textContent = t.langBtn;
+      document.getElementById('eyebrow').textContent = t.eyebrow;
+      document.getElementById('heroTitle').textContent = t.heroTitle;
+      document.getElementById('heroSub').textContent = t.heroSub;
+      document.getElementById('seeServices').textContent = t.seeServices;
+      document.getElementById('s1').textContent = t.s1;
+      document.getElementById('s2').textContent = t.s2;
+      document.getElementById('s3').textContent = t.s3;
+      document.getElementById('c1').textContent = t.c1;
+      document.getElementById('c2').textContent = t.c2;
+      document.getElementById('c3').textContent = t.c3;
+      document.getElementById('c4').textContent = t.c4;
+      document.getElementById('servicesKicker').textContent = t.servicesKicker;
+      document.getElementById('servicesTitle').textContent = t.servicesTitle;
+      document.getElementById('servicesDesc').textContent = t.servicesDesc;
+      document.getElementById('sv1t').textContent = t.sv1t;
+      document.getElementById('sv1d').textContent = t.sv1d;
+      document.getElementById('sv2t').textContent = t.sv2t;
+      document.getElementById('sv2d').textContent = t.sv2d;
+      document.getElementById('sv3t').textContent = t.sv3t;
+      document.getElementById('sv3d').textContent = t.sv3d;
+      document.getElementById('sv4t').textContent = t.sv4t;
+      document.getElementById('sv4d').textContent = t.sv4d;
+      document.getElementById('aboutKicker').textContent = t.aboutKicker;
+      document.getElementById('aboutTitle').textContent = t.aboutTitle;
+      document.getElementById('aboutDesc').textContent = t.aboutDesc;
+      document.getElementById('b1').textContent = t.b1;
+      document.getElementById('b2').textContent = t.b2;
+      document.getElementById('b3').textContent = t.b3;
+      document.getElementById('b4').textContent = t.b4;
+      document.getElementById('processKicker').textContent = t.processKicker;
+      document.getElementById('processTitle').textContent = t.processTitle;
+      document.getElementById('processDesc').textContent = t.processDesc;
+      document.getElementById('p1').textContent = t.p1;
+      document.getElementById('p2').textContent = t.p2;
+      document.getElementById('p3').textContent = t.p3;
+      document.getElementById('ctaTitle').textContent = t.ctaTitle;
+      document.getElementById('ctaDesc').textContent = t.ctaDesc;
+      document.getElementById('footerText').textContent = t.footerText;
+      document.getElementById('waTop').textContent = t.waTop;
+      document.getElementById('waCard').textContent = t.waCard;
+      document.getElementById('waBottom').textContent = t.waBottom;
+
+      const waText = lang === 'en'
+        ? 'Hello QYINTH, I would like to discuss a project.'
+        : 'Halo QYINTH, saya ingin berdiskusi mengenai project.';
+      const waLink = 'https://wa.me/628139179048?text=' + encodeURIComponent(waText);
+      document.getElementById('waTop').href = waLink;
+      document.getElementById('waCard').href = waLink;
+      document.getElementById('waBottom').href = waLink;
+      document.querySelector('.wa-float').href = waLink;
+    }
+
+    document.getElementById('langBtn').addEventListener('click', () => setLang(state.lang === 'en' ? 'id' : 'en'));
+    document.getElementById('langBtnMobile').addEventListener('click', () => setLang(state.lang === 'en' ? 'id' : 'en'));
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('show');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('show'));
+    });
+  </script>
+</body>
+</html>
